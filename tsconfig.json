@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "rootDir": ".",
+    "paths": {},
+    "outDir": "./",
+    "module": "commonjs",
+    "target": "ES5",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "declaration": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom", "es2015"]
+  },
+  "include": ["src"],
+  "exclude": ["test", "dist", "node_modules"]
+}
