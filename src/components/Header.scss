@@ -1,1 +1,7 @@
-// empty
+.header {
+  flex: 0 0 auto;
+}
+
+.header.navbar .navbar-section {
+  flex: 1 1 auto;
+}

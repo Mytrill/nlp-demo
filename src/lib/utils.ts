@@ -21,3 +21,10 @@ export function getUrlParameter(name: string): string | null {
   const url = new URL(location.href)
   return url.searchParams.get(name)
 }
+
+/** Returns a promise that resolves to the given values after some times. Used to test delays in REST calls. */
+export function delay<T>(value?: T): Promise<T> {
+  return Promise.resolve().then(
+    () => new Promise<T>(resolve => setTimeout(() => resolve(value), 1000))
+  )
+}

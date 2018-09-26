@@ -1,1 +1,15 @@
-// empty
+@import "../variables";
+
+.footer {
+  // background-color: $bg-color-toolbar;
+  // color: $font-color-toolbar;
+  text-align: center;
+  font-size: 0.6rem;
+  height: 1.2rem;
+  border-top: 0.05rem solid $border-color;
+  flex: 0 0 auto;
+  a {
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+  }
+}

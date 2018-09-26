@@ -1,2 +1,8 @@
 @import "../node_modules/spectre.css/src/spectre";
 @import "./variables";
+
+.view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

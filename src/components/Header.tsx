@@ -1,8 +1,10 @@
 import { h } from "hyperapp"
 
-import { Status } from "lib/logger/components"
-import { State, Actions } from "api"
+import { NaturalInput } from "lib/nlp/NaturalInput"
 import { Link } from "lib/router"
+
+import { State, Actions } from "modules"
+import { getNlpStatus } from "modules/nlp/selectors"
 
 import "./Header.scss"
 
@@ -21,12 +23,16 @@ export function Header(props: HeaderProps) {
         </Link>
       </section>
       <section class="navbar-section">
-        <Status state={state.logger} actions={actions.logger} />
+        <NaturalInput
+          status={getNlpStatus(state.nlp)}
+          onSearch={actions.execute}
+          placeholder="Ask anything..."
+        />
       </section>
       <section>
-        <a href="https://github.com/Mytrill/nlp-demo" class="btn btn-link">
-          Github
-        </a>
+        <Link href="/people" class="btn btn-link">
+          People
+        </Link>
       </section>
     </header>
   )
