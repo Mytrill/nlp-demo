@@ -1,17 +1,17 @@
 import { h } from "hyperapp"
 
-import { State, Actions } from "modules"
 import { PersonListPanel } from "modules/components"
 
+import "./PeoplePage.scss"
+
 export interface PeoplePageProps {
-  state: State
-  actions: Actions
+  // nothing
 }
 
 export function PeoplePage(props: PeoplePageProps) {
   return (
     <div class="container">
-      <PersonListPanel key="person-list-panel" />
+      <PersonListPanel key="person-list" />
     </div>
   )
 }

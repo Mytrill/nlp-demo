@@ -1,4 +1,4 @@
-import { StringMap } from "lib/api"
+import { StateWithData } from "lib/api"
 
 export interface Person {
   id: string
@@ -8,12 +8,11 @@ export interface Person {
 }
 
 export interface SearchState {
-  text: string
-  results: string[]
+  // text: string // later on, the toString() of the query...
+  results: Person[]
 }
 
-export interface State {
-  data: StringMap<Person>
+export interface State extends StateWithData<Person> {
   search?: SearchState
 }
 
@@ -22,9 +21,5 @@ export interface UpdatePersonPayload extends Partial<Person> {
 }
 
 export interface Actions {
-  // create(person: Person): Promise<void>
-  // delete(id: string): Promise<void>
-  // update(payload: UpdatePersonPayload): Promise<void>
-  search(query: string)
-  clearSearch()
+  set(payload: Partial<State>)
 }

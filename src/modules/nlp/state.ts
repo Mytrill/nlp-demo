@@ -1,5 +1,7 @@
 import { State } from "./api"
 
 export const state: State = {
-  // TODO
+  entries: [],
+  status: "waiting",
+  displayCount: 0
 }

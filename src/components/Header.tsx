@@ -4,7 +4,6 @@ import { NaturalInput } from "lib/nlp/NaturalInput"
 import { Link } from "lib/router"
 
 import { State, Actions } from "modules"
-import { getNlpStatus } from "modules/nlp/selectors"
 
 import "./Header.scss"
 
@@ -24,14 +23,20 @@ export function Header(props: HeaderProps) {
       </section>
       <section class="navbar-section">
         <NaturalInput
-          status={getNlpStatus(state.nlp)}
+          status={state.nlp.status}
           onSearch={actions.execute}
           placeholder="Ask anything..."
+          onToggleChat={actions.nlp.toggleChat}
+          displayCount={state.nlp.displayCount}
+          entries={state.nlp.entries}
         />
       </section>
       <section>
         <Link href="/people" class="btn btn-link">
           People
+        </Link>
+        <Link href="/dashboard" class="btn btn-link text-bold">
+          Dashboard
         </Link>
       </section>
     </header>

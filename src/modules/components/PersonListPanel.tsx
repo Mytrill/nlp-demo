@@ -1,17 +1,8 @@
 import { h } from "hyperapp"
 
-import { State, Actions } from "../api"
+import { State } from "../api"
 import { Panel } from "lib/components/Panel"
-import { Person } from "../people/api"
 import { PersonTile } from "./PersonTile"
-import { SearchField } from "lib/components/SearchField"
-import { getUiWidget } from "lib/selectors"
-
-interface UiState {
-  searchDone: boolean
-  results: any[]
-  query?: string
-}
 
 interface PersonItemProps {
   id: string
@@ -31,21 +22,11 @@ export interface PersonListPanelProps {
 
 export function PersonListPanel(props: PersonListPanelProps) {
   const { key } = props
-  return function(_: State, actions: Actions) {
-    const state: UiState = getUiWidget(actions, key) || {
-      searchDone: false,
-      results: []
-    }
-    const { searchDone, results } = state
+  return function(state: State) {
+    const searchDone = !!state.people.search
+    const results = state.people.search ? state.people.search.results : []
     return (
       <Panel>
-        <Panel.Header>
-          <SearchField
-            key="person-list-search"
-            placeholder="Search People..."
-            onSearch={query => {}}
-          />
-        </Panel.Header>
         <Panel.Body visible={searchDone && results.length > 0}>
           <div class="columns">{results.map(PersonItem)}</div>
         </Panel.Body>

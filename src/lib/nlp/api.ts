@@ -1,29 +1,21 @@
-export interface Select {
-  alias: string
-  inverse: boolean
+export type Operand = "EQ" | "NEQ"
+
+export interface ParsedCondition {
   attribute?: string
-  aggregator?: string
+  operand: Operand
+  value?: any
 }
 
-export interface SourceEntity {
-  type: "entity"
-  alias: string
+export interface ParsedAttribute {
+  key: string
+  inverse: boolean
+}
+
+export interface ParsedQuery {
+  type: "simple_query"
   entity: string
-}
-
-export interface SourceRelation {
-  type: "relation"
-  alias: string
-  entity_alias: string
-  attribute: string
-}
-
-export type Source = SourceEntity | SourceRelation
-
-export interface Query {
-  type: "query"
-  select: Select[]
-  sources: Source[]
+  attributes: ParsedAttribute[]
+  conditions: ParsedCondition[]
 }
 
 export interface Error {
@@ -31,6 +23,13 @@ export interface Error {
   message: string
 }
 
-export type ParsedRequest = Query | Error
+export type ParsedRequest = ParsedQuery | Error
 
-export type Status = "loading" | "waiting" | "error" | "success"
+export type InputStatus = "loading" | "waiting" | "error" | "success"
+
+export type EntryType = "user" | "error" | "reply"
+
+export interface LogEntry {
+  type: EntryType
+  text: string
+}

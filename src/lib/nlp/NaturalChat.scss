@@ -1,0 +1,22 @@
+.natural-chat {
+  position: absolute;
+  top: 2rem;
+  width: 20rem;
+  border: 1px solid gray;
+  background-color: white;
+}
+
+.entry-event__error {
+  background-color: rgb(255, 100, 100);
+}
+
+.entry-event__user::before {
+  color: #5755d9;
+  content: "Me > ";
+}
+
+.close-button {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+}
