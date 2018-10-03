@@ -12,20 +12,37 @@ export interface SearchResult {
   values: any
 }
 
-function satisfyCondition(entity: any, condition: Condition): boolean {
-  // TODO support no attribute better....
-  const value = condition.attribute ? entity[condition.attribute] : entity
+function getValue(entityType: string, entity: any, condition: Condition): any {
+  if (condition.attribute) return entity[condition.attribute]
+  if (entityType === "people") return entity.name
+  return entity
+}
+
+function satisfyCondition(
+  entityType: string,
+  entity: any,
+  condition: Condition
+): boolean {
+  const value = getValue(entityType, entity, condition)
   switch (condition.operand) {
     case "EQ":
+      if (typeof value === "string") {
+        return value.toLowerCase().includes(condition.value.toLowerCase())
+      }
       return value === condition.value
     case "NEQ":
+      if (typeof value === "string") {
+        return !value.toLowerCase().includes(condition.value.toLowerCase())
+      }
       return value !== condition.value
+    case "EXISTS":
+      return value != null // !== null or undefined
+    case "NOT_EXISTS":
+      return value == null // === null or undefined
     case "GT":
     case "GTE":
     case "LT":
     case "LTE":
-    case "EXISTS":
-    case "NOT_EXISTS":
     case "MIN":
     case "NOT_MIN":
     case "MAX":
@@ -89,13 +106,15 @@ export function search(store: DataStore, query: Query): SearchResult {
   const values = Object.values(data)
     .filter(entity =>
       query.conditions.reduce(
-        (prev, condition) => prev && satisfyCondition(entity, condition),
+        (prev, condition) =>
+          prev && satisfyCondition(query.entity, entity, condition),
         true
       )
     )
     .map(getAttributes(query, store))
 
   if (!query.aggregator) {
+    if (values.length === 1) return { type: "single_value", values: values[0] }
     return { type: "value_list", values }
   }
 

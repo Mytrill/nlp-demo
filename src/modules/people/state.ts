@@ -2,28 +2,28 @@ import { State } from "./api"
 
 export const state: State = {
   data: {
-    "person-1": {
-      id: "person-1",
-      name: "Person 1",
-      title: "Person 1 Title",
+    anthony: {
+      id: "anthony",
+      name: "Anthony Ferrando",
+      title: "CTO",
       external: false
     },
-    "person-2": {
-      id: "person-2",
-      name: "Person 2",
-      title: "Person 2 Title",
+    henrique: {
+      id: "henrique",
+      name: "Henrique Spotorno",
+      title: "CFO",
       external: false
     },
-    "person-3": {
-      id: "person-3",
-      name: "Person 3",
-      title: "Person 3 Title",
+    elon: {
+      id: "elon",
+      name: "Elon Musk",
+      title: "CEO",
       external: true
     },
-    "person-4": {
-      id: "person-4",
-      name: "Person 4",
-      title: "Person 4 Title",
+    tanya: {
+      id: "tanya",
+      name: "Tanya Domnina",
+      title: "HR",
       external: true
     }
   }
